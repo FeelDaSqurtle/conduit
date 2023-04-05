@@ -248,97 +248,97 @@ class TestConduit(object):
             for tag in tag_check:
                 assert tag.text in tag_list
 
-#     # Új adat bevitel (új komment írása)
+    # Új adat bevitel (új komment írása)
 
-#     def test_new_comment(self):
-#         self.login()
+    def test_new_comment(self):
+        self.login()
 
-#         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-#         random.choice(article_list).click()
+        article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+        random.choice(article_list).click()
 
-#         comment_body = self.browser.find_element(By.XPATH, "//textarea[contains(@placeholder, 'Write a comment')]")
-#         post_comment_btn = self.browser.find_element(By.XPATH, "//button[@class='btn btn-sm btn-primary']")
+        comment_body = self.browser.find_element(By.XPATH, "//textarea[contains(@placeholder, 'Write a comment')]")
+        post_comment_btn = self.browser.find_element(By.XPATH, "//button[@class='btn btn-sm btn-primary']")
 
-#         comment = 'This is a test comment!'
-#         comment_body.send_keys(comment)
-#         post_comment_btn.click()
+        comment = 'This is a test comment!'
+        comment_body.send_keys(comment)
+        post_comment_btn.click()
 
-#         time.sleep(1)
+        time.sleep(1)
 
-#         comment_list = self.browser.find_elements(By.XPATH, "//p[@class='card-text']")
-#         comment_texts = []
-#         for comm in comment_list:
-#             comment_texts.append(comm.text)
+        comment_list = self.browser.find_elements(By.XPATH, "//p[@class='card-text']")
+        comment_texts = []
+        for comm in comment_list:
+            comment_texts.append(comm.text)
 
-#         assert comment in comment_texts
+        assert comment in comment_texts
 
-#     # Adatok lementése felületről (Adott felhasználó cikkeinek kimentése)
+    # Adatok lementése felületről (Adott felhasználó cikkeinek kimentése)
 
-#     def test_save_articles_to_file(self):
-#         # Bejelentkezés
-#         self.login()
-#         time.sleep(1)
+    def test_save_articles_to_file(self):
+        # Bejelentkezés
+        self.login()
+        time.sleep(1)
 
-#         # Adott userhez navigálás
-#         self.browser.get('http://localhost:1667/#/@testuser1/')
-#         self.browser.refresh()
-#         time.sleep(1)
+        # Adott userhez navigálás
+        self.browser.get('http://localhost:1667/#/@testuser1/')
+        self.browser.refresh()
+        time.sleep(1)
 
-#         # Adatok kimentése
-#         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+        # Adatok kimentése
+        article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
 
-#         with open('saved_article_details.csv', 'w', newline='') as file:
-#             writer = csv.writer(file)
-#             writer.writerow(['Title', 'Author', 'CreationDate', 'Body'])
-#             for x in range(len(article_list)):
-#                 article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-#                 current_article = article_list[x]
-#                 current_article.click()
-#                 time.sleep(1)
-#                 title = self.browser.find_element(By.XPATH, "//h1")
-#                 author = self.browser.find_element(By.XPATH, "//a[@class='author']")
-#                 date = self.browser.find_element(By.XPATH, "//span[@class='date']")
-#                 article_body = self.browser.find_element(By.XPATH, "//div[@class='row article-content']/*/*/p")
-#                 writer.writerow([title.text, author.text, date.text.replace(",", "."), article_body])
-#                 self.browser.back()
-#                 time.sleep(1)
+        with open('vizsgaremek/Vizsgaremek_Python/saved_article_details.csv', 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['Title', 'Author', 'CreationDate', 'Body'])
+            for x in range(len(article_list)):
+                article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+                current_article = article_list[x]
+                current_article.click()
+                time.sleep(1)
+                title = self.browser.find_element(By.XPATH, "//h1")
+                author = self.browser.find_element(By.XPATH, "//a[@class='author']")
+                date = self.browser.find_element(By.XPATH, "//span[@class='date']")
+                article_body = self.browser.find_element(By.XPATH, "//div[@class='row article-content']/*/*/p")
+                writer.writerow([title.text, author.text, date.text.replace(",", "."), article_body])
+                self.browser.back()
+                time.sleep(1)
 
-#         # Ellenőrzés title alapján
+        # Ellenőrzés title alapján
 
-#         self.browser.get('http://localhost:1667/#/@testuser1/')
-#         self.browser.refresh()
-#         time.sleep(1)
+        self.browser.get('http://localhost:1667/#/@testuser1/')
+        self.browser.refresh()
+        time.sleep(1)
 
-#         saved_title_list = []
-#         with open('saved_article_details.csv', 'r') as file:
-#             title_table = csv.reader(file)
-#             next(title_table)
-#             for row in title_table:
-#                 saved_title_list.append(row[0])
-#         time.sleep(1)
-#         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-#         for x in range(2):
-#             assert article_list[x].text in saved_title_list
+        saved_title_list = []
+        with open('vizsgaremek/Vizsgaremek_Python/saved_article_details.csv', 'r') as file:
+            title_table = csv.reader(file)
+            next(title_table)
+            for row in title_table:
+                saved_title_list.append(row[0])
+        time.sleep(1)
+        article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+        for x in range(2):
+            assert article_list[x].text in saved_title_list
 
-#     # Több oldalas lista bejárása
-
-#     def test_list_traversal(self):
-#         # Bejelentkezés
-#         self.login()
-
-#         # Feed ellenőrzése hogy vannak cikkek és léptető gombok
-#         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-#         assert len(article_list) >= 1
-#         page_btns = self.browser.find_elements(By.XPATH, "//ul[@class='pagination']//li")
-#         for button in page_btns:
-#             body = self.browser.find_element(By.XPATH, "//body")
-#             body.send_keys(Keys.END)
-#             if button.get_attribute('class') != 'page-item active':
-#                 clickable_button = self.browser.find_elements(By.XPATH, "//li//a[@class='page-link']")[page_btns.index(button)]
-#                 clickable_button.click()
-#                 time.sleep(1)
-#                 article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-#                 assert len(article_list) >= 1
+    # # Több oldalas lista bejárása
+    #
+    # def test_list_traversal(self):
+    #     # Bejelentkezés
+    #     self.login()
+    #
+    #     # Feed ellenőrzése hogy vannak cikkek és léptető gombok
+    #     article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+    #     assert len(article_list) >= 1
+    #     page_btns = self.browser.find_elements(By.XPATH, "//ul[@class='pagination']//li")
+    #     for button in page_btns:
+    #         body = self.browser.find_element(By.XPATH, "//body")
+    #         body.send_keys(Keys.END)
+    #         if button.get_attribute('class') != 'page-item active':
+    #             clickable_button = self.browser.find_elements(By.XPATH, "//li//a[@class='page-link']")[page_btns.index(button)]
+    #             clickable_button.click()
+    #             time.sleep(1)
+    #             article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+    #             assert len(article_list) >= 1
 
 #     # Adat vagy adatok törlése
 
