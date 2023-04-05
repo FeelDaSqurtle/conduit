@@ -138,6 +138,7 @@ class TestConduit(object):
 
             success_icon = self.browser.find_element(By.XPATH, "//div[@class='swal-icon--success__ring']")
             popup_ok_btn = self.browser.find_element(By.XPATH, "//button[@class='swal-button swal-button--confirm']")
+            time.sleep(1)
             assert success_icon.is_displayed() and popup_ok_btn.is_displayed()
             popup_ok_btn.click()
             time.sleep(2)
