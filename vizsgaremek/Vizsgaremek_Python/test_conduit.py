@@ -365,28 +365,28 @@ class TestConduit(object):
         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
         assert len(article_list) == 0
 
-#     # Kijelentkezés
+    # Kijelentkezés
 
-#     def test_logout(self):
-#         # Bejelentkezés
-#         self.login()
+    def test_logout(self):
+        # Bejelentkezés
+        self.login()
 
-#         # Kijelentkezés
-#         Logout_btn = self.browser.find_element(By.XPATH, "//i[@class='ion-android-exit']")
-#         assert Logout_btn.is_displayed()
-#         Logout_btn.click()
-#         Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
-#         Signup_btn = self.browser.find_element(By.XPATH, "//a[@href='#/register']")
-#         assert Login_btn.is_displayed()
-#         assert Signup_btn.is_displayed()
+        # Kijelentkezés
+        Logout_btn = self.browser.find_element(By.XPATH, "//i[@class='ion-android-exit']")
+        assert Logout_btn.is_displayed()
+        Logout_btn.click()
+        Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
+        Signup_btn = self.browser.find_element(By.XPATH, "//a[@href='#/register']")
+        assert Login_btn.is_displayed()
+        assert Signup_btn.is_displayed()
 
-#     # Adatok listázása (kimentés listába és megnézzük hogy nem üres-e a lista)(popular tag-ek)
+    # Adatok listázása (kimentés listába és megnézzük hogy nem üres-e a lista)(popular tag-ek)
 
-#     def test_list_data(self):
-#         # Bejelentkezés
-#         self.login()
+    def test_list_data(self):
+        # Bejelentkezés
+        self.login()
 
-#         # Popular tag-ek kilistázása
-#         tags_list = self.browser.find_elements(By.XPATH, "//div[@class='sidebar']//div[@class='tag-list']//a")
-#         assert len(tags_list) > 1
+        # Popular tag-ek kilistázása
+        tags_list = self.browser.find_elements(By.XPATH, "//div[@class='sidebar']//div[@class='tag-list']//a")
+        assert len(tags_list) > 1
 
