@@ -320,50 +320,50 @@ class TestConduit(object):
         for x in range(2):
             assert article_list[x].text in saved_title_list
 
-    # # Több oldalas lista bejárása
-    #
-    # def test_list_traversal(self):
-    #     # Bejelentkezés
-    #     self.login()
-    #
-    #     # Feed ellenőrzése hogy vannak cikkek és léptető gombok
-    #     article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-    #     assert len(article_list) >= 1
-    #     page_btns = self.browser.find_elements(By.XPATH, "//ul[@class='pagination']//li")
-    #     for button in page_btns:
-    #         body = self.browser.find_element(By.XPATH, "//body")
-    #         body.send_keys(Keys.END)
-    #         if button.get_attribute('class') != 'page-item active':
-    #             clickable_button = self.browser.find_elements(By.XPATH, "//li//a[@class='page-link']")[page_btns.index(button)]
-    #             clickable_button.click()
-    #             time.sleep(1)
-    #             article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-    #             assert len(article_list) >= 1
+    # Több oldalas lista bejárása
 
-#     # Adat vagy adatok törlése
+    def test_list_traversal(self):
+        # Bejelentkezés
+        self.login()
 
-#     def test_delete_my_articles(self):
-#         # Bejelentkezés
-#         self.login()
-#         time.sleep(1)
+        # Feed ellenőrzése hogy vannak cikkek és léptető gombok
+        article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+        assert len(article_list) >= 1
+        page_btns = self.browser.find_elements(By.XPATH, "//ul[@class='pagination']//li")
+        for button in page_btns:
+            body = self.browser.find_element(By.XPATH, "//body")
+            body.send_keys(Keys.END)
+            if button.get_attribute('class') != 'page-item active':
+                clickable_button = self.browser.find_elements(By.XPATH, "//li//a[@class='page-link']")[page_btns.index(button)]
+                clickable_button.click()
+                time.sleep(1)
+                article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+                assert len(article_list) >= 1
 
-#         # Profilhoz navigálás
-#         self.go_to_profile()
+    # Adat vagy adatok törlése
 
-#         # Cikkek törlése
+    def test_delete_my_articles(self):
+        # Bejelentkezés
+        self.login()
+        time.sleep(1)
 
-#         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-#         for x in range(len(article_list)):
-#             article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-#             current_article = article_list[0]
-#             current_article.click()
-#             deleted_btn = WebDriverWait(self.browser, 3).until(
-#                 EC.presence_of_element_located((By.XPATH, "//i[@class='ion-trash-a']")))
-#             deleted_btn.click()
-#             self.go_to_profile()
+        # Profilhoz navigálás
+        self.go_to_profile()
 
-#         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-#         assert len(article_list) == 0
+        # Cikkek törlése
+
+        article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+        for x in range(len(article_list)):
+            article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+            current_article = article_list[0]
+            current_article.click()
+            deleted_btn = WebDriverWait(self.browser, 3).until(
+                EC.presence_of_element_located((By.XPATH, "//i[@class='ion-trash-a']")))
+            deleted_btn.click()
+            self.go_to_profile()
+
+        article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+        assert len(article_list) == 0
 
 #     # Kijelentkezés
 
