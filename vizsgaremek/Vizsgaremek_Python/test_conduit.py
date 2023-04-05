@@ -18,8 +18,11 @@ class TestConduit(object):
         service = Service(executable_path='ChromeDriver/chromedriver.exe')
         options = Options()
         options.add_experimental_option("detach", True)
+        options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
         # options.add_argument('window-position=-1000,0')
-        global browser
+        # global browser
         self.browser = webdriver.Chrome(service=service, options=options)
 
         URL_main = "http://localhost:1667/#/"
