@@ -173,42 +173,42 @@ class TestConduit(object):
 
             self.logout()
 
-#     # Meglévő adat módosítás
+    # Meglévő adat módosítás
 
-#     def test_data_change(self):
-#         # Bejelentkezés
-#         self.login()
+    def test_data_change(self):
+        # Bejelentkezés
+        self.login()
 
-#         # Adatmódosítás
-#         profile_setting_btn = self.browser.find_element(By.XPATH, "//a[@href='#/settings']")
-#         profile_setting_btn.click()
+        # Adatmódosítás
+        profile_setting_btn = self.browser.find_element(By.XPATH, "//a[@href='#/settings']")
+        profile_setting_btn.click()
 
-#         profile_pic_URL_input = self.browser.find_element(By.XPATH, "//input[@placeholder='URL of profile picture']")
-#         username_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Your username']")
-#         bio_input = self.browser.find_element(By.XPATH, "//textarea[@placeholder='Short bio about you']")
-#         update_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Update Settings')]")
+        profile_pic_URL_input = self.browser.find_element(By.XPATH, "//input[@placeholder='URL of profile picture']")
+        username_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Your username']")
+        bio_input = self.browser.find_element(By.XPATH, "//textarea[@placeholder='Short bio about you']")
+        update_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Update Settings')]")
 
-#         profile_pic_URL_input.clear()
-#         profile_pic_URL_input.send_keys('https://seeklogo.com/images/G/Galactic_Empire-logo-7A19A28ABA-seeklogo.com.png')
-#         username_input.clear()
-#         username_input.send_keys('ChangedTestUser')
-#         bio_input.clear()
-#         bio_input.send_keys('This is my modified bio')
-#         update_btn.click()
+        profile_pic_URL_input.clear()
+        profile_pic_URL_input.send_keys('https://seeklogo.com/images/G/Galactic_Empire-logo-7A19A28ABA-seeklogo.com.png')
+        username_input.clear()
+        username_input.send_keys('ChangedTestUser')
+        bio_input.clear()
+        bio_input.send_keys('This is my modified bio')
+        update_btn.click()
 
-#         successful_update_icon = self.browser.find_element(By.XPATH, "//div[@class='swal-icon--success__ring']")
-#         popup_ok_btn = self.browser.find_element(By.XPATH, "//button[@class='swal-button swal-button--confirm']")
-#         assert successful_update_icon.is_displayed()
-#         popup_ok_btn.click()
+        successful_update_icon = self.browser.find_element(By.XPATH, "//div[@class='swal-icon--success__ring']")
+        popup_ok_btn = self.browser.find_element(By.XPATH, "//button[@class='swal-button swal-button--confirm']")
+        assert successful_update_icon.is_displayed()
+        popup_ok_btn.click()
 
-#         # Böngésző frissítés és ellenőrzés
-#         self.browser.refresh()
-#         profile_pic_URL_input = self.browser.find_element(By.XPATH, "//input[@placeholder='URL of profile picture']")
-#         username_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Your username']")
-#         bio_input = self.browser.find_element(By.XPATH, "//textarea[@placeholder='Short bio about you']")
-#         assert profile_pic_URL_input.get_attribute('value') == 'https://seeklogo.com/images/G/Galactic_Empire-logo-7A19A28ABA-seeklogo.com.png'
-#         assert username_input.get_attribute('value') == 'ChangedTestUser'
-#         assert bio_input.get_attribute('value') == 'This is my modified bio'
+        # Böngésző frissítés és ellenőrzés
+        self.browser.refresh()
+        profile_pic_URL_input = self.browser.find_element(By.XPATH, "//input[@placeholder='URL of profile picture']")
+        username_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Your username']")
+        bio_input = self.browser.find_element(By.XPATH, "//textarea[@placeholder='Short bio about you']")
+        assert profile_pic_URL_input.get_attribute('value') == 'https://seeklogo.com/images/G/Galactic_Empire-logo-7A19A28ABA-seeklogo.com.png'
+        assert username_input.get_attribute('value') == 'ChangedTestUser'
+        assert bio_input.get_attribute('value') == 'This is my modified bio'
 
 #     # Ismételt és sorozatos adatbevitel adatforrásból (új cikkek írása)
 
