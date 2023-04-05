@@ -362,6 +362,7 @@ class TestConduit(object):
             deleted_btn.click()
             self.go_to_profile()
 
+        time.sleep(1)
         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
         assert len(article_list) == 0
 
@@ -393,3 +394,4 @@ class TestConduit(object):
 #Testrun1
 #Testrun2
 #Testrun3
+#Testrun4
