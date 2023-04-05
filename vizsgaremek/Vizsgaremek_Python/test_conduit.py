@@ -21,8 +21,6 @@ class TestConduit(object):
         options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
-        # options.add_argument('window-position=-1000,0')
-        # global browser
         self.browser = webdriver.Chrome(service=service, options=options)
 
         URL_main = "http://localhost:1667/#/"
@@ -210,54 +208,45 @@ class TestConduit(object):
         assert username_input.get_attribute('value') == 'ChangedTestUser'
         assert bio_input.get_attribute('value') == 'This is my modified bio'
 
-#     # Ismételt és sorozatos adatbevitel adatforrásból (új cikkek írása)
+    # Ismételt és sorozatos adatbevitel adatforrásból (új cikkek írása)
 
-#     def test_new_articles(self):
-#         # Bejelentkezés
-#         self.login()
+    def test_new_articles(self):
+        # Bejelentkezés
+        self.login()
 
-#         # Új cikk írása
+        # Új cikk írása
 
-#         # beolvasás fileból
-#         self.read_file('multiple_articles.csv')
-#         # új cikk publikálása
-#         for article in file_list:
-#             new_article_btn = self.browser.find_element(By.XPATH, "//a[@href='#/editor']")
-#             new_article_btn.click()
+        # beolvasás fileból
+        self.read_file('multiple_articles.csv')
+        # új cikk publikálása
+        for article in file_list:
+            new_article_btn = self.browser.find_element(By.XPATH, "//a[@href='#/editor']")
+            new_article_btn.click()
 
-#             title_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Article Title']")
-#             about_input = self.browser.find_element(By.XPATH, "//input[contains(@placeholder, 'about')]")
-#             article_body_input = self.browser.find_element(By.XPATH, "//textarea[contains(@placeholder, 'Write your article')]")
-#             tag_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Enter tags']")
-#             publish_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Publish')]")
+            title_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Article Title']")
+            about_input = self.browser.find_element(By.XPATH, "//input[contains(@placeholder, 'about')]")
+            article_body_input = self.browser.find_element(By.XPATH, "//textarea[contains(@placeholder, 'Write your article')]")
+            tag_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Enter tags']")
+            publish_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Publish')]")
 
-#             title_input.send_keys(article[0])
-#             about_input.send_keys(article[1])
-#             article_body_input.send_keys(article[2])
-#             tag_input.send_keys(article[3])
-#             publish_btn.click()
-#             time.sleep(1)
+            title_input.send_keys(article[0])
+            about_input.send_keys(article[1])
+            article_body_input.send_keys(article[2])
+            tag_input.send_keys(article[3])
+            publish_btn.click()
+            time.sleep(1)
 
-#             # ellenőrzés hogy a cikk a megfelelő adatokkal jött létre
-#             title_check = self.browser.find_element(By.XPATH, "//h1")
-#             body_check = self.browser.find_element(By.XPATH, "//div//p")
-#             tag_check = self.browser.find_elements(By.XPATH, "//a[@class='tag-pill tag-default']")
-#             tag_list = article[3].split(';')
-#             tag_list.pop(-1)
+            # ellenőrzés hogy a cikk a megfelelő adatokkal jött létre
+            title_check = self.browser.find_element(By.XPATH, "//h1")
+            body_check = self.browser.find_element(By.XPATH, "//div//p")
+            tag_check = self.browser.find_elements(By.XPATH, "//a[@class='tag-pill tag-default']")
+            tag_list = article[3].split(';')
+            tag_list.pop(-1)
 
-#             try:
-#                 assert title_check.text == article[0]
-#             except:
-#                 print('A cím nem egyezik')
-#             try:
-#                 assert body_check.text == article[2]
-#             except:
-#                 print('A törzs nem egyezik')
-#             for tag in tag_check:
-#                 try:
-#                     assert tag.text in tag_list
-#                 except:
-#                     print(f'A tag nem egyezik ({tag})')
+            assert title_check.text == article[0]
+            assert body_check.text == article[2]
+            for tag in tag_check:
+                assert tag.text in tag_list
 
 #     # Új adat bevitel (új komment írása)
 
