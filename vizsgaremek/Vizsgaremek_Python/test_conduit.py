@@ -143,38 +143,34 @@ class TestConduit(object):
             time.sleep(2)
             self.logout()
 
-#     # Bejelentkezés
+    # Bejelentkezés
 
-#     def test_multiple_login(self):
-#         # Beolvasás fileból
-#         self.read_file('signup_credentials.csv')
-#         # with open('signup_credentials.csv', 'r') as login_cred:
-#         #     login_table = csv.reader(login_cred, delimiter=',')
-#         #     next(login_table)
-#         #     for row in login_table:
-#         #         login_credentials.append(row)
-#         # Bejelentkezés próbálkozások
-#         for attempt in file_list:
-#             Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
-#             Login_btn.click()
+    def test_multiple_login(self):
+        # Beolvasás fileból
+        self.read_file('signup_credentials.csv')
+        
+        # Bejelentkezés próbálkozások
+        for attempt in file_list:
+            Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
+            Login_btn.click()
 
-#             Password_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Password']")
-#             Email_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Email']")
-#             Signin_lgn_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Sign in')]")
-#             Need_an_account_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Need an account?')]")
-#             Home_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Home')]")
-#             Conduit_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'conduit')]")
-#             Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
-#             Signup_btn = self.browser.find_element(By.XPATH, "//a[@href='#/register']")
+            Password_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Password']")
+            Email_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Email']")
+            Signin_lgn_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Sign in')]")
+            Need_an_account_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Need an account?')]")
+            Home_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Home')]")
+            Conduit_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'conduit')]")
+            Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
+            Signup_btn = self.browser.find_element(By.XPATH, "//a[@href='#/register']")
 
-#             assert Password_input.get_attribute('type') == "password"
-#             assert Signin_lgn_btn.is_displayed()
+            assert Password_input.get_attribute('type') == "password"
+            assert Signin_lgn_btn.is_displayed()
 
-#             Email_input.send_keys(attempt[1])
-#             Password_input.send_keys(attempt[2])
-#             Signin_lgn_btn.click()
+            Email_input.send_keys(attempt[1])
+            Password_input.send_keys(attempt[2])
+            Signin_lgn_btn.click()
 
-#             self.logout()
+            self.logout()
 
 #     # Meglévő adat módosítás
 
