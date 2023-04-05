@@ -18,7 +18,7 @@ class TestConduit(object):
         service = Service(executable_path='ChromeDriver/chromedriver.exe')
         options = Options()
         options.add_experimental_option("detach", True)
-        options.add_argument('window-position=-1000,0')
+        # options.add_argument('window-position=-1000,0')
         global browser
         self.browser = webdriver.Chrome(service=service, options=options)
 
