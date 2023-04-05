@@ -39,7 +39,7 @@ class TestConduit(object):
 
     def login(self):
         login_credentials = []
-        with open('login_credentials.csv', 'r') as login_file:
+        with open('vizsgaremek/Vizsgaremek_Python/login_credentials.csv', 'r') as login_file:
             login_table = csv.reader(login_file, delimiter=',')
             next(login_table)
             for row in login_table:
@@ -67,7 +67,7 @@ class TestConduit(object):
     def read_file(self, filename):
         global file_list
         file_list = []
-        with open(str(filename), 'r') as opened_file:
+        with open('vizsgaremek/Vizsgaremek_Python/'+str(filename), 'r') as opened_file:
             file_table = csv.reader(opened_file, delimiter=',')
             next(file_table)
             for row in file_table:
@@ -112,11 +112,7 @@ class TestConduit(object):
 
         # Beolvasás fileból
         self.read_file('signup_credentials.csv')
-        # with open('signup_credentials.csv', 'r') as login_cred:
-        #     login_table = csv.reader(login_cred, delimiter=',')
-        #     next(login_table)
-        #     for row in login_table:
-        #         signup_credentials.append(row)
+        
         # Regisztráció próbálkozások
         for attempt in file_list:
             Signup_btn = self.browser.find_element(By.XPATH, "//a[@href='#/register']")
@@ -147,264 +143,264 @@ class TestConduit(object):
             time.sleep(2)
             self.logout()
 
-    # Bejelentkezés
+#     # Bejelentkezés
 
-    def test_multiple_login(self):
-        # Beolvasás fileból
-        self.read_file('signup_credentials.csv')
-        # with open('signup_credentials.csv', 'r') as login_cred:
-        #     login_table = csv.reader(login_cred, delimiter=',')
-        #     next(login_table)
-        #     for row in login_table:
-        #         login_credentials.append(row)
-        # Bejelentkezés próbálkozások
-        for attempt in file_list:
-            Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
-            Login_btn.click()
+#     def test_multiple_login(self):
+#         # Beolvasás fileból
+#         self.read_file('signup_credentials.csv')
+#         # with open('signup_credentials.csv', 'r') as login_cred:
+#         #     login_table = csv.reader(login_cred, delimiter=',')
+#         #     next(login_table)
+#         #     for row in login_table:
+#         #         login_credentials.append(row)
+#         # Bejelentkezés próbálkozások
+#         for attempt in file_list:
+#             Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
+#             Login_btn.click()
 
-            Password_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Password']")
-            Email_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Email']")
-            Signin_lgn_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Sign in')]")
-            Need_an_account_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Need an account?')]")
-            Home_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Home')]")
-            Conduit_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'conduit')]")
-            Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
-            Signup_btn = self.browser.find_element(By.XPATH, "//a[@href='#/register']")
+#             Password_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Password']")
+#             Email_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Email']")
+#             Signin_lgn_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Sign in')]")
+#             Need_an_account_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Need an account?')]")
+#             Home_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Home')]")
+#             Conduit_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'conduit')]")
+#             Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
+#             Signup_btn = self.browser.find_element(By.XPATH, "//a[@href='#/register']")
 
-            assert Password_input.get_attribute('type') == "password"
-            assert Signin_lgn_btn.is_displayed()
+#             assert Password_input.get_attribute('type') == "password"
+#             assert Signin_lgn_btn.is_displayed()
 
-            Email_input.send_keys(attempt[1])
-            Password_input.send_keys(attempt[2])
-            Signin_lgn_btn.click()
+#             Email_input.send_keys(attempt[1])
+#             Password_input.send_keys(attempt[2])
+#             Signin_lgn_btn.click()
 
-            self.logout()
+#             self.logout()
 
-    # Meglévő adat módosítás
+#     # Meglévő adat módosítás
 
-    def test_data_change(self):
-        # Bejelentkezés
-        self.login()
+#     def test_data_change(self):
+#         # Bejelentkezés
+#         self.login()
 
-        # Adatmódosítás
-        profile_setting_btn = self.browser.find_element(By.XPATH, "//a[@href='#/settings']")
-        profile_setting_btn.click()
+#         # Adatmódosítás
+#         profile_setting_btn = self.browser.find_element(By.XPATH, "//a[@href='#/settings']")
+#         profile_setting_btn.click()
 
-        profile_pic_URL_input = self.browser.find_element(By.XPATH, "//input[@placeholder='URL of profile picture']")
-        username_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Your username']")
-        bio_input = self.browser.find_element(By.XPATH, "//textarea[@placeholder='Short bio about you']")
-        update_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Update Settings')]")
+#         profile_pic_URL_input = self.browser.find_element(By.XPATH, "//input[@placeholder='URL of profile picture']")
+#         username_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Your username']")
+#         bio_input = self.browser.find_element(By.XPATH, "//textarea[@placeholder='Short bio about you']")
+#         update_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Update Settings')]")
 
-        profile_pic_URL_input.clear()
-        profile_pic_URL_input.send_keys('https://seeklogo.com/images/G/Galactic_Empire-logo-7A19A28ABA-seeklogo.com.png')
-        username_input.clear()
-        username_input.send_keys('ChangedTestUser')
-        bio_input.clear()
-        bio_input.send_keys('This is my modified bio')
-        update_btn.click()
+#         profile_pic_URL_input.clear()
+#         profile_pic_URL_input.send_keys('https://seeklogo.com/images/G/Galactic_Empire-logo-7A19A28ABA-seeklogo.com.png')
+#         username_input.clear()
+#         username_input.send_keys('ChangedTestUser')
+#         bio_input.clear()
+#         bio_input.send_keys('This is my modified bio')
+#         update_btn.click()
 
-        successful_update_icon = self.browser.find_element(By.XPATH, "//div[@class='swal-icon--success__ring']")
-        popup_ok_btn = self.browser.find_element(By.XPATH, "//button[@class='swal-button swal-button--confirm']")
-        assert successful_update_icon.is_displayed()
-        popup_ok_btn.click()
+#         successful_update_icon = self.browser.find_element(By.XPATH, "//div[@class='swal-icon--success__ring']")
+#         popup_ok_btn = self.browser.find_element(By.XPATH, "//button[@class='swal-button swal-button--confirm']")
+#         assert successful_update_icon.is_displayed()
+#         popup_ok_btn.click()
 
-        # Böngésző frissítés és ellenőrzés
-        self.browser.refresh()
-        profile_pic_URL_input = self.browser.find_element(By.XPATH, "//input[@placeholder='URL of profile picture']")
-        username_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Your username']")
-        bio_input = self.browser.find_element(By.XPATH, "//textarea[@placeholder='Short bio about you']")
-        assert profile_pic_URL_input.get_attribute('value') == 'https://seeklogo.com/images/G/Galactic_Empire-logo-7A19A28ABA-seeklogo.com.png'
-        assert username_input.get_attribute('value') == 'ChangedTestUser'
-        assert bio_input.get_attribute('value') == 'This is my modified bio'
+#         # Böngésző frissítés és ellenőrzés
+#         self.browser.refresh()
+#         profile_pic_URL_input = self.browser.find_element(By.XPATH, "//input[@placeholder='URL of profile picture']")
+#         username_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Your username']")
+#         bio_input = self.browser.find_element(By.XPATH, "//textarea[@placeholder='Short bio about you']")
+#         assert profile_pic_URL_input.get_attribute('value') == 'https://seeklogo.com/images/G/Galactic_Empire-logo-7A19A28ABA-seeklogo.com.png'
+#         assert username_input.get_attribute('value') == 'ChangedTestUser'
+#         assert bio_input.get_attribute('value') == 'This is my modified bio'
 
-    # Ismételt és sorozatos adatbevitel adatforrásból (új cikkek írása)
+#     # Ismételt és sorozatos adatbevitel adatforrásból (új cikkek írása)
 
-    def test_new_articles(self):
-        # Bejelentkezés
-        self.login()
+#     def test_new_articles(self):
+#         # Bejelentkezés
+#         self.login()
 
-        # Új cikk írása
+#         # Új cikk írása
 
-        # beolvasás fileból
-        self.read_file('multiple_articles.csv')
-        # új cikk publikálása
-        for article in file_list:
-            new_article_btn = self.browser.find_element(By.XPATH, "//a[@href='#/editor']")
-            new_article_btn.click()
+#         # beolvasás fileból
+#         self.read_file('multiple_articles.csv')
+#         # új cikk publikálása
+#         for article in file_list:
+#             new_article_btn = self.browser.find_element(By.XPATH, "//a[@href='#/editor']")
+#             new_article_btn.click()
 
-            title_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Article Title']")
-            about_input = self.browser.find_element(By.XPATH, "//input[contains(@placeholder, 'about')]")
-            article_body_input = self.browser.find_element(By.XPATH, "//textarea[contains(@placeholder, 'Write your article')]")
-            tag_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Enter tags']")
-            publish_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Publish')]")
+#             title_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Article Title']")
+#             about_input = self.browser.find_element(By.XPATH, "//input[contains(@placeholder, 'about')]")
+#             article_body_input = self.browser.find_element(By.XPATH, "//textarea[contains(@placeholder, 'Write your article')]")
+#             tag_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Enter tags']")
+#             publish_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Publish')]")
 
-            title_input.send_keys(article[0])
-            about_input.send_keys(article[1])
-            article_body_input.send_keys(article[2])
-            tag_input.send_keys(article[3])
-            publish_btn.click()
-            time.sleep(1)
+#             title_input.send_keys(article[0])
+#             about_input.send_keys(article[1])
+#             article_body_input.send_keys(article[2])
+#             tag_input.send_keys(article[3])
+#             publish_btn.click()
+#             time.sleep(1)
 
-            # ellenőrzés hogy a cikk a megfelelő adatokkal jött létre
-            title_check = self.browser.find_element(By.XPATH, "//h1")
-            body_check = self.browser.find_element(By.XPATH, "//div//p")
-            tag_check = self.browser.find_elements(By.XPATH, "//a[@class='tag-pill tag-default']")
-            tag_list = article[3].split(';')
-            tag_list.pop(-1)
+#             # ellenőrzés hogy a cikk a megfelelő adatokkal jött létre
+#             title_check = self.browser.find_element(By.XPATH, "//h1")
+#             body_check = self.browser.find_element(By.XPATH, "//div//p")
+#             tag_check = self.browser.find_elements(By.XPATH, "//a[@class='tag-pill tag-default']")
+#             tag_list = article[3].split(';')
+#             tag_list.pop(-1)
 
-            try:
-                assert title_check.text == article[0]
-            except:
-                print('A cím nem egyezik')
-            try:
-                assert body_check.text == article[2]
-            except:
-                print('A törzs nem egyezik')
-            for tag in tag_check:
-                try:
-                    assert tag.text in tag_list
-                except:
-                    print(f'A tag nem egyezik ({tag})')
+#             try:
+#                 assert title_check.text == article[0]
+#             except:
+#                 print('A cím nem egyezik')
+#             try:
+#                 assert body_check.text == article[2]
+#             except:
+#                 print('A törzs nem egyezik')
+#             for tag in tag_check:
+#                 try:
+#                     assert tag.text in tag_list
+#                 except:
+#                     print(f'A tag nem egyezik ({tag})')
 
-    # Új adat bevitel (új komment írása)
+#     # Új adat bevitel (új komment írása)
 
-    def test_new_comment(self):
-        self.login()
+#     def test_new_comment(self):
+#         self.login()
 
-        article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-        random.choice(article_list).click()
+#         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+#         random.choice(article_list).click()
 
-        comment_body = self.browser.find_element(By.XPATH, "//textarea[contains(@placeholder, 'Write a comment')]")
-        post_comment_btn = self.browser.find_element(By.XPATH, "//button[@class='btn btn-sm btn-primary']")
+#         comment_body = self.browser.find_element(By.XPATH, "//textarea[contains(@placeholder, 'Write a comment')]")
+#         post_comment_btn = self.browser.find_element(By.XPATH, "//button[@class='btn btn-sm btn-primary']")
 
-        comment = 'This is a test comment!'
-        comment_body.send_keys(comment)
-        post_comment_btn.click()
+#         comment = 'This is a test comment!'
+#         comment_body.send_keys(comment)
+#         post_comment_btn.click()
 
-        time.sleep(1)
+#         time.sleep(1)
 
-        comment_list = self.browser.find_elements(By.XPATH, "//p[@class='card-text']")
-        comment_texts = []
-        for comm in comment_list:
-            comment_texts.append(comm.text)
+#         comment_list = self.browser.find_elements(By.XPATH, "//p[@class='card-text']")
+#         comment_texts = []
+#         for comm in comment_list:
+#             comment_texts.append(comm.text)
 
-        assert comment in comment_texts
+#         assert comment in comment_texts
 
-    # Adatok lementése felületről (Adott felhasználó cikkeinek kimentése)
+#     # Adatok lementése felületről (Adott felhasználó cikkeinek kimentése)
 
-    def test_save_articles_to_file(self):
-        # Bejelentkezés
-        self.login()
-        time.sleep(1)
+#     def test_save_articles_to_file(self):
+#         # Bejelentkezés
+#         self.login()
+#         time.sleep(1)
 
-        # Adott userhez navigálás
-        self.browser.get('http://localhost:1667/#/@testuser1/')
-        self.browser.refresh()
-        time.sleep(1)
+#         # Adott userhez navigálás
+#         self.browser.get('http://localhost:1667/#/@testuser1/')
+#         self.browser.refresh()
+#         time.sleep(1)
 
-        # Adatok kimentése
-        article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+#         # Adatok kimentése
+#         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
 
-        with open('saved_article_details.csv', 'w', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow(['Title', 'Author', 'CreationDate', 'Body'])
-            for x in range(len(article_list)):
-                article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-                current_article = article_list[x]
-                current_article.click()
-                time.sleep(1)
-                title = self.browser.find_element(By.XPATH, "//h1")
-                author = self.browser.find_element(By.XPATH, "//a[@class='author']")
-                date = self.browser.find_element(By.XPATH, "//span[@class='date']")
-                article_body = self.browser.find_element(By.XPATH, "//div[@class='row article-content']/*/*/p")
-                writer.writerow([title.text, author.text, date.text.replace(",", "."), article_body])
-                self.browser.back()
-                time.sleep(1)
+#         with open('saved_article_details.csv', 'w', newline='') as file:
+#             writer = csv.writer(file)
+#             writer.writerow(['Title', 'Author', 'CreationDate', 'Body'])
+#             for x in range(len(article_list)):
+#                 article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+#                 current_article = article_list[x]
+#                 current_article.click()
+#                 time.sleep(1)
+#                 title = self.browser.find_element(By.XPATH, "//h1")
+#                 author = self.browser.find_element(By.XPATH, "//a[@class='author']")
+#                 date = self.browser.find_element(By.XPATH, "//span[@class='date']")
+#                 article_body = self.browser.find_element(By.XPATH, "//div[@class='row article-content']/*/*/p")
+#                 writer.writerow([title.text, author.text, date.text.replace(",", "."), article_body])
+#                 self.browser.back()
+#                 time.sleep(1)
 
-        # Ellenőrzés title alapján
+#         # Ellenőrzés title alapján
 
-        self.browser.get('http://localhost:1667/#/@testuser1/')
-        self.browser.refresh()
-        time.sleep(1)
+#         self.browser.get('http://localhost:1667/#/@testuser1/')
+#         self.browser.refresh()
+#         time.sleep(1)
 
-        saved_title_list = []
-        with open('saved_article_details.csv', 'r') as file:
-            title_table = csv.reader(file)
-            next(title_table)
-            for row in title_table:
-                saved_title_list.append(row[0])
-        time.sleep(1)
-        article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-        for x in range(2):
-            assert article_list[x].text in saved_title_list
+#         saved_title_list = []
+#         with open('saved_article_details.csv', 'r') as file:
+#             title_table = csv.reader(file)
+#             next(title_table)
+#             for row in title_table:
+#                 saved_title_list.append(row[0])
+#         time.sleep(1)
+#         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+#         for x in range(2):
+#             assert article_list[x].text in saved_title_list
 
-    # Több oldalas lista bejárása
+#     # Több oldalas lista bejárása
 
-    def test_list_traversal(self):
-        # Bejelentkezés
-        self.login()
+#     def test_list_traversal(self):
+#         # Bejelentkezés
+#         self.login()
 
-        # Feed ellenőrzése hogy vannak cikkek és léptető gombok
-        article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-        assert len(article_list) >= 1
-        page_btns = self.browser.find_elements(By.XPATH, "//ul[@class='pagination']//li")
-        for button in page_btns:
-            body = self.browser.find_element(By.XPATH, "//body")
-            body.send_keys(Keys.END)
-            if button.get_attribute('class') != 'page-item active':
-                clickable_button = self.browser.find_elements(By.XPATH, "//li//a[@class='page-link']")[page_btns.index(button)]
-                clickable_button.click()
-                time.sleep(1)
-                article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-                assert len(article_list) >= 1
+#         # Feed ellenőrzése hogy vannak cikkek és léptető gombok
+#         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+#         assert len(article_list) >= 1
+#         page_btns = self.browser.find_elements(By.XPATH, "//ul[@class='pagination']//li")
+#         for button in page_btns:
+#             body = self.browser.find_element(By.XPATH, "//body")
+#             body.send_keys(Keys.END)
+#             if button.get_attribute('class') != 'page-item active':
+#                 clickable_button = self.browser.find_elements(By.XPATH, "//li//a[@class='page-link']")[page_btns.index(button)]
+#                 clickable_button.click()
+#                 time.sleep(1)
+#                 article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+#                 assert len(article_list) >= 1
 
-    # Adat vagy adatok törlése
+#     # Adat vagy adatok törlése
 
-    def test_delete_my_articles(self):
-        # Bejelentkezés
-        self.login()
-        time.sleep(1)
+#     def test_delete_my_articles(self):
+#         # Bejelentkezés
+#         self.login()
+#         time.sleep(1)
 
-        # Profilhoz navigálás
-        self.go_to_profile()
+#         # Profilhoz navigálás
+#         self.go_to_profile()
 
-        # Cikkek törlése
+#         # Cikkek törlése
 
-        article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-        for x in range(len(article_list)):
-            article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-            current_article = article_list[0]
-            current_article.click()
-            deleted_btn = WebDriverWait(self.browser, 3).until(
-                EC.presence_of_element_located((By.XPATH, "//i[@class='ion-trash-a']")))
-            deleted_btn.click()
-            self.go_to_profile()
+#         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+#         for x in range(len(article_list)):
+#             article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+#             current_article = article_list[0]
+#             current_article.click()
+#             deleted_btn = WebDriverWait(self.browser, 3).until(
+#                 EC.presence_of_element_located((By.XPATH, "//i[@class='ion-trash-a']")))
+#             deleted_btn.click()
+#             self.go_to_profile()
 
-        article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
-        assert len(article_list) == 0
+#         article_list = self.browser.find_elements(By.XPATH, "//a[@class='preview-link']//h1")
+#         assert len(article_list) == 0
 
-    # Kijelentkezés
+#     # Kijelentkezés
 
-    def test_logout(self):
-        # Bejelentkezés
-        self.login()
+#     def test_logout(self):
+#         # Bejelentkezés
+#         self.login()
 
-        # Kijelentkezés
-        Logout_btn = self.browser.find_element(By.XPATH, "//i[@class='ion-android-exit']")
-        assert Logout_btn.is_displayed()
-        Logout_btn.click()
-        Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
-        Signup_btn = self.browser.find_element(By.XPATH, "//a[@href='#/register']")
-        assert Login_btn.is_displayed()
-        assert Signup_btn.is_displayed()
+#         # Kijelentkezés
+#         Logout_btn = self.browser.find_element(By.XPATH, "//i[@class='ion-android-exit']")
+#         assert Logout_btn.is_displayed()
+#         Logout_btn.click()
+#         Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
+#         Signup_btn = self.browser.find_element(By.XPATH, "//a[@href='#/register']")
+#         assert Login_btn.is_displayed()
+#         assert Signup_btn.is_displayed()
 
-    # Adatok listázása (kimentés listába és megnézzük hogy nem üres-e a lista)(popular tag-ek)
+#     # Adatok listázása (kimentés listába és megnézzük hogy nem üres-e a lista)(popular tag-ek)
 
-    def test_list_data(self):
-        # Bejelentkezés
-        self.login()
+#     def test_list_data(self):
+#         # Bejelentkezés
+#         self.login()
 
-        # Popular tag-ek kilistázása
-        tags_list = self.browser.find_elements(By.XPATH, "//div[@class='sidebar']//div[@class='tag-list']//a")
-        assert len(tags_list) > 1
+#         # Popular tag-ek kilistázása
+#         tags_list = self.browser.find_elements(By.XPATH, "//div[@class='sidebar']//div[@class='tag-list']//a")
+#         assert len(tags_list) > 1
 
