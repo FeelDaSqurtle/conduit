@@ -384,12 +384,3 @@ class TestConduit(object):
         # Popular tag-ek kilistázása
         tags_list = self.browser.find_elements(By.XPATH, "//div[@class='sidebar']//div[@class='tag-list']//a")
         assert len(tags_list) > 1
-
-#Testrun1
-#Testrun2
-#Testrun3
-#Testrun4
-#Testrun5
-#Testrun6
-#Testrun7
-#Testrun8
