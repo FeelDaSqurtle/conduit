@@ -182,7 +182,7 @@ class TestConduit(object):
         update_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Update Settings')]")
 
         profile_pic_URL_input.clear()
-        profile_pic_URL_input.send_keys()
+        profile_pic_URL_input.send_keys(data_change_dict['URL'])
         username_input.clear()
         username_input.send_keys(data_change_dict['username'])
         bio_input.clear()
@@ -391,3 +391,4 @@ class TestConduit(object):
 #Testrun4
 #Testrun5
 #Testrun6
+#Testrun7
