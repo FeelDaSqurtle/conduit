@@ -2,6 +2,7 @@ import random
 import time
 import csv
 
+from dict import *
 from selenium import webdriver
 from selenium.webdriver import Keys
 from selenium.webdriver.chrome.service import Service
@@ -11,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 class TestConduit(object):
-    # Böngésző megnyitás / bezárása funkció
+    ## Böngésző megnyitás / bezárása funkció
 
     def setup_method(self):
         time.sleep(1)
@@ -33,7 +34,7 @@ class TestConduit(object):
         self.browser.quit()
         time.sleep(1)
 
-    # Kisegítő metódusok
+    ## Kisegítő metódusok
 
     def login(self):
         login_credentials = []
@@ -73,12 +74,14 @@ class TestConduit(object):
 
     def go_to_profile(self):
         time.sleep(2)
-        self.browser.get('http://localhost:1667/#/@ChangedTestUser/')
+        self.browser.get(f'http://localhost:1667/#/@{data_change_dict["username"]}/')
         time.sleep(2)
         self.browser.refresh()
         time.sleep(2)
         edit_profile_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Edit Profile')]")
         assert edit_profile_btn.is_displayed()
+
+    ## Tesztek
 
     # Főoldal és gombjai vendégként
 
@@ -87,7 +90,6 @@ class TestConduit(object):
         Conduit_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'conduit')]")
         Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
         Signup_btn = self.browser.find_element(By.XPATH, "//a[@href='#/register']")
-        Pupular_tags = self.browser.find_elements(By.XPATH, "//p[text()='Popular Tags']/following-sibling::div//a[@class='tag-pill tag-default']")
         assert Conduit_btn.is_displayed()
         assert Login_btn.is_displayed()
         assert Signup_btn.is_displayed()
@@ -98,7 +100,6 @@ class TestConduit(object):
     def test_accept_cookies(self):
         accept_cookies_btn = self.browser.find_element(By.XPATH, "//div[@class='cookie__bar__buttons']//button[contains(@class, 'accept')]")
         decline_cookies_btn = self.browser.find_element(By.XPATH, "//div[@class='cookie__bar__buttons']//button[contains(@class, 'decline')]")
-        learn_more_btn = self.browser.find_element(By.XPATH, "//a[text()='Learn More...']")
         assert accept_cookies_btn.is_displayed() and decline_cookies_btn.is_displayed()
         accept_cookies_btn.click()
         time.sleep(1)
@@ -120,11 +121,6 @@ class TestConduit(object):
             Email_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Email']")
             Password_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Password']")
             Signup_reg_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Sign up')]")
-            Have_an_account_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Have an account?')]")
-            Home_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Home')]")
-            Conduit_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'conduit')]")
-            Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
-            Signup_btn = self.browser.find_element(By.XPATH, "//a[@href='#/register']")
 
             assert Password_input.get_attribute('type') == "password"
             assert Signup_reg_btn.is_displayed()
@@ -156,11 +152,6 @@ class TestConduit(object):
             Password_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Password']")
             Email_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Email']")
             Signin_lgn_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Sign in')]")
-            Need_an_account_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Need an account?')]")
-            Home_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'Home')]")
-            Conduit_btn = self.browser.find_element(By.XPATH, "//a[contains(text(), 'conduit')]")
-            Login_btn = self.browser.find_element(By.XPATH, "//a[@href='#/login']")
-            Signup_btn = self.browser.find_element(By.XPATH, "//a[@href='#/register']")
 
             assert Password_input.get_attribute('type') == "password"
             assert Signin_lgn_btn.is_displayed()
@@ -168,6 +159,10 @@ class TestConduit(object):
             Email_input.send_keys(attempt[1])
             Password_input.send_keys(attempt[2])
             Signin_lgn_btn.click()
+
+            time.sleep(1)
+            Logout_btn = WebDriverWait(self.browser, 3).until(EC.presence_of_element_located((By.XPATH, "//i[@class='ion-android-exit']")))
+            assert Logout_btn.is_displayed()
 
             self.logout()
 
@@ -187,11 +182,11 @@ class TestConduit(object):
         update_btn = self.browser.find_element(By.XPATH, "//button[contains(text(), 'Update Settings')]")
 
         profile_pic_URL_input.clear()
-        profile_pic_URL_input.send_keys('https://seeklogo.com/images/G/Galactic_Empire-logo-7A19A28ABA-seeklogo.com.png')
+        profile_pic_URL_input.send_keys()
         username_input.clear()
-        username_input.send_keys('ChangedTestUser')
+        username_input.send_keys(data_change_dict['username'])
         bio_input.clear()
-        bio_input.send_keys('This is my modified bio')
+        bio_input.send_keys(data_change_dict['bio'])
         update_btn.click()
 
         successful_update_icon = self.browser.find_element(By.XPATH, "//div[@class='swal-icon--success__ring']")
@@ -204,9 +199,9 @@ class TestConduit(object):
         profile_pic_URL_input = self.browser.find_element(By.XPATH, "//input[@placeholder='URL of profile picture']")
         username_input = self.browser.find_element(By.XPATH, "//input[@placeholder='Your username']")
         bio_input = self.browser.find_element(By.XPATH, "//textarea[@placeholder='Short bio about you']")
-        assert profile_pic_URL_input.get_attribute('value') == 'https://seeklogo.com/images/G/Galactic_Empire-logo-7A19A28ABA-seeklogo.com.png'
-        assert username_input.get_attribute('value') == 'ChangedTestUser'
-        assert bio_input.get_attribute('value') == 'This is my modified bio'
+        assert profile_pic_URL_input.get_attribute('value') == data_change_dict['URL']
+        assert username_input.get_attribute('value') == data_change_dict['username']
+        assert bio_input.get_attribute('value') == data_change_dict['bio']
 
     # Ismételt és sorozatos adatbevitel adatforrásból (új cikkek írása)
 
@@ -259,8 +254,7 @@ class TestConduit(object):
         comment_body = self.browser.find_element(By.XPATH, "//textarea[contains(@placeholder, 'Write a comment')]")
         post_comment_btn = self.browser.find_element(By.XPATH, "//button[@class='btn btn-sm btn-primary']")
 
-        comment = 'This is a test comment!'
-        comment_body.send_keys(comment)
+        comment_body.send_keys(test_comment)
         post_comment_btn.click()
 
         time.sleep(1)
@@ -270,7 +264,7 @@ class TestConduit(object):
         for comm in comment_list:
             comment_texts.append(comm.text)
 
-        assert comment in comment_texts
+        assert test_comment in comment_texts
 
     # Adatok lementése felületről (Adott felhasználó cikkeinek kimentése)
 
@@ -381,7 +375,7 @@ class TestConduit(object):
         assert Login_btn.is_displayed()
         assert Signup_btn.is_displayed()
 
-    # Adatok listázása (kimentés listába és megnézzük hogy nem üres-e a lista)(popular tag-ek)
+    # Adatok listázása (popular tag-ek)
 
     def test_list_data(self):
         # Bejelentkezés
